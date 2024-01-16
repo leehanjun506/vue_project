@@ -72,7 +72,7 @@ export default {
       currentPage.value = page;
       error.value = '';
       try{
-        const res = await axios.get(`http://localhost:3000/todos?_page=${page}&_limit=${limit}`);
+        const res = await axios.get(`http://localhost:3001/todos?_page=${page}&_limit=${limit}`);
         numberOfTodos.value = res.headers['x-total-count'];
         todos.value = res.data;
 
@@ -87,7 +87,7 @@ export default {
       // 데이터베이스 투두를 저장
       error.value = ''; // 다시 요청할때 이전 error value 초기화 시키기 위해
       try {
-        const res = await axios.post('http://localhost:3000/todos', {
+        const res = await axios.post('http://localhost:3001/todos', {
           subject: todo.subject,
           completed: todo.completed,
         });
@@ -108,7 +108,7 @@ export default {
       error.value = '';
       const id = todos.value[index].id;
       try {
-        await axios.patch('http://localhost:3000/todos/'+id,{
+        await axios.patch('http://localhost:3001/todos/'+id,{
           completed: !todos.value[index].completed
         });
         todos.value[index].completed = !todos.value[index].completed;
@@ -123,7 +123,7 @@ export default {
       error.value = '';
       const id = todos.value[index].id;
       try {
-        await axios.delete('http://localhost:3000/todos/' + id);
+        await axios.delete('http://localhost:3001/todos/' + id);
         todos.value.splice(index, 1);
       } catch (err){
         console.log(err);
